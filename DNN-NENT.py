@@ -91,8 +91,8 @@ df_pred=doc.w2vFromPOR(w2vs, comparison_nns, model)
 #####
 ##IMPORTS
 #####
-train_data='./test_datav2.csv' #Original file, train_datav2.csv is too big to upload. Contact me for the file.
-test_data='./test_datav2.csv'
+train_data='./test_data-nent.csv' #Original file, train_datav2.csv is too big to upload. Contact me for the file.
+test_data='./test_datav-nent.csv'
 features=[str(k) for k in range(vec_dims)]
 DNN_COLUMNS=list(features)+['Labels']
 
