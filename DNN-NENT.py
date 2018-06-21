@@ -199,7 +199,7 @@ class DNN:
         def predict():
                 predictions = pred_m.predict_classes(input_fn=pred_input_fn)
                 return predictions
-
+        
         def convert(classes, wordlist, document):
                 doc = codecs.open(document, 'r', 'utf-8')
                 searchlines = doc.readlines()
@@ -214,7 +214,9 @@ class DNN:
 
                 for entry in convert_dic:
                         if entry[1]==1:
-                                text.replace(entry[0], 'spooky')
+                                text.replace(entry[0], 'Apple')
+                        if entry[1]==2:
+                                text.replace(entry[0], 'Banana')
 
                 return text
 
