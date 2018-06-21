@@ -91,13 +91,13 @@ df_pred=doc.w2vFromPOR(w2vs, comparison_nns, model)
 #####
 ##IMPORTS
 #####
-train_data='./train_datav2.csv'
+train_data='./test_datav2.csv' #Original file, train_datav2.csv is too big to upload. Contact me for the file.
 test_data='./test_datav2.csv'
 features=[str(k) for k in range(vec_dims)]
 DNN_COLUMNS=list(features)+['Labels']
 
-#df_train = pd.read_csv(train_data, names=DNN_COLUMNS, skipinitialspace=True)
-#df_test = pd.read_csv(test_data, names=DNN_COLUMNS, skipinitialspace=True)
+df_train = pd.read_csv(train_data, names=DNN_COLUMNS, skipinitialspace=True)
+df_test = pd.read_csv(test_data, names=DNN_COLUMNS, skipinitialspace=True)
 
 #####
 ##VARIABLES PART II
