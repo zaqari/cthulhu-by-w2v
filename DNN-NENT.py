@@ -34,8 +34,7 @@ class doc:
                 for i, line in enumerate(searchlines):
                         readable = line.replace('\\', '').replace('}', '').replace('uc0u8232', '').replace('\'92', '\'').replace('a0', '').replace('\'93', '\"').replace('\'94', '\"').replace('\'96', ',').replace('\'97', ',').replace('f0fs24 ', '').replace('cf0 ', '').replace('< ', '').replace(' >', '').replace('\r\n', '').replace('Mr.', 'mr').replace('Ms.', 'ms').replace('Mrs.', 'mrs').replace('Dr.', 'dr').replace('mr.', 'mr').replace('ms.', 'ms').replace('mrs.', 'ms').replace('dr.', 'dr')
                         tok_words=nltk.word_tokenize(line)
-                        pos=nltk.pos_tag(tok_words)
-                        for word in pos:
+                        for word in tok_words:
                                 data.append(word)
 
                 return data
@@ -46,7 +45,7 @@ class doc:
 
                 for word in listin:
                         try:
-                                data.append(w2vmode.wv[lem.lemmatize(str(word[0]))])
+                                data.append(w2vmode.wv[lem.lemmatize(str(word))])
                         except KeyError:
                                 data.append(np.array([0.0 for k in range(vec_dims)]))
 
@@ -75,7 +74,8 @@ class doc:
                         data.append(word_vec)
         
                 df_out=pd.DataFrame(np.array(data).reshape(-1, len(cols)), columns=cols)
-                df_out['Labels']=3
+                df_out['Labels']=0
+                
                 return df_out
 
 
@@ -92,12 +92,13 @@ df_pred=doc.w2vFromPOR(w2vs, comparison_nns, model)
 ##IMPORTS
 #####
 train_data='./nent-vecs.csv'
-test_data='./test_datav-nent.csv'
+test_data='./test_data-nent.csv'
 features=[str(k) for k in range(vec_dims)]
 DNN_COLUMNS=list(features)+['Labels']
 
 df_train = pd.read_csv(train_data, names=DNN_COLUMNS, skipinitialspace=True)
 df_test = pd.read_csv(test_data, names=DNN_COLUMNS, skipinitialspace=True)
+#df_pred = pd.read_csv(tru_test_data, names=DNN_COLUMNS, skipinitialspace=True)
 
 #####
 ##VARIABLES PART II
@@ -109,7 +110,7 @@ model_dir=[
         './_models/nent',
         ]
 early_stop=500
-nClasses=len(set(df_train['Labels'].values.tolist()))
+nClasses=3#len(set(df_pred['Labels'].values.tolist()))
 
 
 #####
@@ -197,7 +198,7 @@ class DNN:
         def predict():
                 predictions = pred_m.predict_classes(input_fn=pred_input_fn)
                 return predictions
-        
+
         def convert(classes, wordlist, document):
                 doc = codecs.open(document, 'r', 'utf-8')
                 searchlines = doc.readlines()
@@ -240,6 +241,6 @@ class DNN:
 pred=DNN.predict()
 new_text=DNN.convert(pred, word_list, corpus_path)
 
-doc=open('./Cthulhu-Protagonist-Antagonist.txt', 'w')
+doc=codecs.open('./Cthulhu-NENT.txt', 'w', 'utf-8')
 doc.write(new_text)
 doc.close()
