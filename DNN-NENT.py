@@ -91,15 +91,13 @@ df_pred=doc.w2vFromPOR(w2vs, comparison_nns, model)
 #####
 ##IMPORTS
 #####
-train_data='/Users/ZaqRosen/Desktop/embodied-nlp/train_datav2.csv'
-test_data='/Users/ZaqRosen/Desktop/embodied-nlp/test_datav2.csv'
-pred_data='/Users/ZaqRosen/Desktop/embodied-nlp/tru_test.csv'
+train_data='./train_datav2.csv'
+test_data='./test_datav2.csv'
 features=[str(k) for k in range(vec_dims)]
 DNN_COLUMNS=list(features)+['Labels']
 
-df_train = pd.read_csv(train_data, names=DNN_COLUMNS, skipinitialspace=True)
-df_test = pd.read_csv(test_data, names=DNN_COLUMNS, skipinitialspace=True)
-#df_pred = pd.read_csv(tru_test_data, names=DNN_COLUMNS, skipinitialspace=True)
+#df_train = pd.read_csv(train_data, names=DNN_COLUMNS, skipinitialspace=True)
+#df_test = pd.read_csv(test_data, names=DNN_COLUMNS, skipinitialspace=True)
 
 #####
 ##VARIABLES PART II
