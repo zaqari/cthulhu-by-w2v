@@ -90,8 +90,8 @@ df_pred=doc.w2vFromPOR(w2vs, comparison_nns, model)
 #####
 ##IMPORTS
 #####
-train_data='/Users/ZaqRosen/Desktop/embodied-nlp/train_datav2.csv'
-test_data='/Users/ZaqRosen/Desktop/embodied-nlp/test_datav2.csv'
+train_data='./test_datav2.csv' #Original, train_datav2.csv, was too large to upload. Contact me for the file.
+test_data='./test_datav2.csv'
 pred_data='/Users/ZaqRosen/Desktop/embodied-nlp/tru_test.csv'
 features=[str(k) for k in range(vec_dims)]
 DNN_COLUMNS=list(features)+['Labels']
